@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +56,7 @@
             height: 200%;
             top: -50%;
             left: -50%;
-            background: 
+            background:
                 radial-gradient(circle at 30% 30%, var(--purple-glow) 0%, transparent 50%),
                 radial-gradient(circle at 70% 70%, var(--cyan-glow) 0%, transparent 50%),
                 radial-gradient(circle at 20% 80%, var(--purple-glow) 0%, transparent 40%),
@@ -65,8 +66,13 @@
         }
 
         @keyframes moveMesh {
-            from { transform: translate(0, 0) rotate(0deg); }
-            to { transform: translate(10%, 10%) rotate(5deg); }
+            from {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            to {
+                transform: translate(10%, 10%) rotate(5deg);
+            }
         }
 
         /* --- Navigation --- */
@@ -164,6 +170,56 @@
             color: white;
         }
 
+        /* --- Dark Mode Toggle --- */
+        .dark-mode-toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .dark-mode-toggle input {
+            display: none;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: #fff;
+            transition: var(--transition);
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background: linear-gradient(45deg, #4f46e5, #3b82f6);
+            border-color: #3b82f6;
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .dark-mode-toggle:hover .toggle-slider {
+            border-color: var(--cyan);
+        }
+
         /* --- Hero Section --- */
         .hero {
             height: 100vh;
@@ -203,7 +259,9 @@
         }
 
         @keyframes blink {
-            50% { border-color: transparent; }
+            50% {
+                border-color: transparent;
+            }
         }
 
         .hero-btns {
@@ -493,6 +551,33 @@
             box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
         }
 
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            transition: var(--transition);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            min-height: 260px;
+            aspect-ratio: 16 / 10;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
         .project-img {
             width: 100%;
             height: 200px;
@@ -616,7 +701,8 @@
             position: relative;
         }
 
-        .form-group input, .form-group textarea {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
             padding: 0.8rem 1rem;
             background: rgba(255, 255, 255, 0.05);
@@ -627,7 +713,8 @@
             transition: var(--transition);
         }
 
-        .form-group input:focus, .form-group textarea:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             border-color: var(--cyan);
             background: rgba(255, 255, 255, 0.1);
         }
@@ -660,13 +747,27 @@
 
         /* --- Animations --- */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* --- Responsive Design --- */
@@ -692,26 +793,58 @@
                 justify-content: center;
             }
 
-            .about-container, .contact-container {
+            .about-container,
+            .contact-container {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-            .timeline::before { left: 40px; }
-            .timeline-item { justify-content: flex-start; padding-left: 80px; }
-            .timeline-item:nth-child(even) { flex-direction: row; }
-            .timeline-content { width: 100%; }
-            .timeline-dot { left: 40px; }
+
+            .timeline::before {
+                left: 40px;
+            }
+
+            .timeline-item {
+                justify-content: flex-start;
+                padding-left: 80px;
+            }
+
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 40px;
+            }
         }
 
         @media (max-width: 768px) {
-            nav { padding: 1rem 5%; }
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero .typing-container { font-size: 1.5rem; }
-            section { padding: 60px 5%; }
+            nav {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero .typing-container {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="bg-wrapper">
@@ -729,6 +862,10 @@
                 <li><a href="#projects" data-i18n="nav-projects">Projects</a></li>
                 <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
             </ul>
+            <label class="dark-mode-toggle">
+                <input type="checkbox" id="dark-mode-checkbox">
+                <span class="toggle-slider"></span>
+            </label>
             <div class="lang-switcher">
                 <select class="lang-select" id="lang-select">
                     <option value="en">EN</option>
@@ -761,15 +898,22 @@
         <h2 class="section-title" data-i18n="about-title">About Me</h2>
         <div class="about-container">
             <div class="about-img">
-                <img src="lesly.jpeg" alt="Akanyana Lesly" style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
+                <img src="lesly.jpeg" alt="Akanyana Lesly"
+                    style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
             </div>
             <div class="about-text">
                 <h3 data-i18n="about-heading">Designing the Future, One Line at a Time.</h3>
-                <p data-i18n="about-p1">I am a passionate Full-Stack Developer and creative problem solver currently pursuing my studies at <strong>AUCA (Adventist University of Central Africa)</strong>. I have a deep love for building digital experiences that matter, blending aesthetic design with robust functionality.</p>
+                <p data-i18n="about-p1">I am a passionate Full-Stack Developer and creative problem solver currently
+                    pursuing my studies at <strong>AUCA (Adventist University of Central Africa)</strong>. I have a deep
+                    love for building digital experiences that matter, blending aesthetic design with robust
+                    functionality.</p>
                 <br>
-                <p data-i18n="about-p2">My approach is simple: understand the problem, architect the solution, and deliver excellence. Whether it's a complex enterprise application or a sleek landing page, I bring the same level of dedication and precision to every project.</p>
+                <p data-i18n="about-p2">My approach is simple: understand the problem, architect the solution, and
+                    deliver excellence. Whether it's a complex enterprise application or a sleek landing page, I bring
+                    the same level of dedication and precision to every project.</p>
                 <div class="hero-btns" style="margin-top: 2rem; justify-content: flex-start;">
-                    <a href="https://drive.google.com/uc?export=download&id=1mJhglJO-fTE8DPwr19qfPoazJZvJroUQ" target="_blank" class="btn btn-primary" data-i18n="about-btn-cv">Download CV</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1mJhglJO-fTE8DPwr19qfPoazJZvJroUQ"
+                        target="_blank" class="btn btn-primary" data-i18n="about-btn-cv">Download CV</a>
                 </div>
             </div>
         </div>
@@ -822,8 +966,11 @@
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
                     <h3 style="color: var(--cyan);" data-i18n="exp-role1">Software Engineering Student</h3>
-                    <p style="font-size: 0.8rem; color: var(--purple);" data-i18n="exp-place1">AUCA (Adventist University of Central Africa) | 2023 - Present</p>
-                    <p data-i18n="exp-desc1">Focusing on full-stack development, software architecture, and solving complex problems through code. Actively building projects using PHP, MySQL, and modern web technologies.</p>
+                    <p style="font-size: 0.8rem; color: var(--purple);" data-i18n="exp-place1">AUCA (Adventist
+                        University of Central Africa) | 2023 - Present</p>
+                    <p data-i18n="exp-desc1">Focusing on full-stack development, software architecture, and solving
+                        complex problems through code. Actively building projects using PHP, MySQL, and modern web
+                        technologies.</p>
                 </div>
             </div>
             <div class="timeline-item">
@@ -831,7 +978,11 @@
                 <div class="timeline-content">
                     <h3 style="color: var(--cyan);" data-i18n="exp-role2">A2SV Trainee (Africa to Silicon Valley)</h3>
                     <p style="font-size: 0.8rem; color: var(--purple);" data-i18n="exp-place2">2025 - Present</p>
-                    <p data-i18n="exp-desc2">Participating in an intensive training program focused on algorithms, data structures, and problem-solving to prepare for top tech company interviews. Building strong foundations in competitive programming and software engineering best practices. Also exploring the integration of Artificial Intelligence tools and technologies to enhance development workflows and build smarter, more efficient solutions.</p>
+                    <p data-i18n="exp-desc2">Participating in an intensive training program focused on algorithms, data
+                        structures, and problem-solving to prepare for top tech company interviews. Building strong
+                        foundations in competitive programming and software engineering best practices. Also exploring
+                        the integration of Artificial Intelligence tools and technologies to enhance development
+                        workflows and build smarter, more efficient solutions.</p>
                 </div>
             </div>
         </div>
@@ -842,11 +993,13 @@
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-img">
-                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Medical Appointment System" style="width: 100%; height: 200px; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
+                        alt="Medical Appointment System" style="width: 100%; height: 200px; object-fit: cover;">
                 </div>
                 <div class="project-info">
                     <h3 data-i18n="proj1-title">Medical Appointment System</h3>
-                    <p data-i18n="proj1-desc">A comprehensive system for scheduling and managing medical appointments efficiently.</p>
+                    <p data-i18n="proj1-desc">A comprehensive system for scheduling and managing medical appointments
+                        efficiently.</p>
                     <div class="project-tags">
                         <span class="tag">PHP</span>
                         <span class="tag">MySQL</span>
@@ -854,18 +1007,23 @@
                         <span class="tag">JavaScript</span>
                     </div>
                     <div class="project-links">
-                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/medicalappoint/index.html" target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
-                        <a href="https://github.com/Akanyanalesly/medical-appointment-system" target="_blank" class="project-btn btn-github">GitHub</a>
+                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/medicalappoint/index.html"
+                            target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
+                        <a href="https://github.com/Akanyanalesly/medical-appointment-system" target="_blank"
+                            class="project-btn btn-github">GitHub</a>
                     </div>
                 </div>
             </div>
             <div class="project-card">
                 <div class="project-img">
-                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=80" alt="Personal Nutrition Management System" style="width: 100%; height: 200px; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=80"
+                        alt="Personal Nutrition Management System"
+                        style="width: 100%; height: 200px; object-fit: cover;">
                 </div>
                 <div class="project-info">
                     <h3 data-i18n="proj2-title">Personal Nutrition Management System</h3>
-                    <p data-i18n="proj2-desc">Track dietary habits and manage personalized nutrition plans for a healthier lifestyle.</p>
+                    <p data-i18n="proj2-desc">Track dietary habits and manage personalized nutrition plans for a
+                        healthier lifestyle.</p>
                     <div class="project-tags">
                         <span class="tag">PHP</span>
                         <span class="tag">MySQL</span>
@@ -873,18 +1031,22 @@
                         <span class="tag">JavaScript</span>
                     </div>
                     <div class="project-links">
-                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/Personal%20nutrition%20Management%20System/index.php" target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
-                        <a href="https://github.com/Akanyanalesly/personal-nutrition-management-system" target="_blank" class="project-btn btn-github">GitHub</a>
+                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/Personal%20nutrition%20Management%20System/index.php"
+                            target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
+                        <a href="https://github.com/Akanyanalesly/personal-nutrition-management-system" target="_blank"
+                            class="project-btn btn-github">GitHub</a>
                     </div>
                 </div>
             </div>
             <div class="project-card">
                 <div class="project-img">
-                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Taxi Management System" style="width: 100%; height: 200px; object-fit: cover;">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80"
+                        alt="Taxi Management System" style="width: 100%; height: 200px; object-fit: cover;">
                 </div>
                 <div class="project-info">
                     <h3 data-i18n="proj3-title">Taxi Management System</h3>
-                    <p data-i18n="proj3-desc">Streamlined platform for managing taxi bookings, driver assignments, and fleet operations.</p>
+                    <p data-i18n="proj3-desc">Streamlined platform for managing taxi bookings, driver assignments, and
+                        fleet operations.</p>
                     <div class="project-tags">
                         <span class="tag">PHP</span>
                         <span class="tag">MySQL</span>
@@ -892,10 +1054,21 @@
                         <span class="tag">CSS3</span>
                     </div>
                     <div class="project-links">
-                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/taxi_management/index.php" target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
-                        <a href="https://github.com/Akanyanalesly/taxi_management" target="_blank" class="project-btn btn-github">GitHub</a>
+                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/taxi_management/index.php"
+                            target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
+                        <a href="https://github.com/Akanyanalesly/taxi_management" target="_blank"
+                            class="project-btn btn-github">GitHub</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="section-title">Moments & Memories</h2>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <img src="memory1.jpeg" alt="Moments & Memories">
             </div>
         </div>
     </section>
@@ -905,7 +1078,8 @@
         <div class="contact-container">
             <div class="contact-info">
                 <h3 data-i18n="contact-heading">Let's Collaborate</h3>
-                <p data-i18n="contact-desc">Have a project in mind or just want to say hi? Feel free to reach out through the form or my social channels.</p>
+                <p data-i18n="contact-desc">Have a project in mind or just want to say hi? Feel free to reach out
+                    through the form or my social channels.</p>
                 <div class="info-item" style="margin-top: 2rem;">
                     <i class='bx bx-envelope'></i>
                     <span><a href="mailto:leslyakanyana38@gmail.com">leslyakanyana38@gmail.com</a></span>
@@ -920,7 +1094,8 @@
                 </div>
                 <div class="social-icons">
                     <a href="https://github.com/Akanyanalesly" target="_blank"><i class='bx bxl-github'></i></a>
-                    <a href="https://www.linkedin.com/in/akanyana-lesly-3735582a3/" target="_blank"><i class='bx bxl-linkedin-square'></i></a>
+                    <a href="https://www.linkedin.com/in/akanyana-lesly-3735582a3/" target="_blank"><i
+                            class='bx bxl-linkedin-square'></i></a>
                     <a href="#" target="_blank"><i class='bx bxl-twitter'></i></a>
                     <a href="#" target="_blank"><i class='bx bxl-instagram'></i></a>
                 </div>
@@ -933,15 +1108,18 @@
                     <input type="email" data-i18n-placeholder="contact-email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <textarea rows="5" data-i18n-placeholder="contact-msg" placeholder="Your Message" required></textarea>
+                    <textarea rows="5" data-i18n-placeholder="contact-msg" placeholder="Your Message"
+                        required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;" data-i18n="contact-btn">Send Message</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;" data-i18n="contact-btn">Send
+                    Message</button>
             </form>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Akanyana Lesly. <span data-i18n="footer-copy">All rights reserved. Designed with</span> <span style="color: var(--purple);">&hearts;</span></p>
+        <p>&copy; 2024 Akanyana Lesly. <span data-i18n="footer-copy">All rights reserved. Designed with</span> <span
+                style="color: var(--purple);">&hearts;</span></p>
     </footer>
 
     <script>
@@ -1194,7 +1372,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('reveal');
-                    
+
                     if (entry.target.id === 'skills') {
                         const progressBars = entry.target.querySelectorAll('.progress');
                         progressBars.forEach(bar => {
@@ -1229,9 +1407,68 @@
                 }, 3000);
             }, 1500);
         });
+
+        // --- Dark Mode Toggle ---
+        const darkModeToggle = document.getElementById('dark-mode-checkbox');
+        const root = document.documentElement;
+
+        // Define dark mode colors
+        const darkModeColors = {
+            '--purple': '#60a5fa',
+            '--cyan': '#38bdf8',
+            '--dark-bg': '#0a0a14',
+            '--text-main': '#e0e0e0',
+            '--text-dim': '#a0a0a0'
+        };
+
+        const lightModeColors = {
+            '--purple': '#9d50bb',
+            '--cyan': '#00d2ff',
+            '--dark-bg': '#0a0a0a',
+            '--text-main': '#f0f0f0',
+            '--text-dim': '#b0b0b0'
+        };
+
+        // Load dark mode preference from localStorage
+        function loadDarkModePreference() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            darkModeToggle.checked = isDarkMode;
+            applyDarkMode(isDarkMode);
+        }
+
+        // Apply dark mode colors
+        function applyDarkMode(isDarkMode) {
+            const colors = isDarkMode ? darkModeColors : lightModeColors;
+            Object.keys(colors).forEach(key => {
+                root.style.setProperty(key, colors[key]);
+            });
+
+            // Update the background gradient in the mesh
+            const meshGradient = document.querySelector('.mesh-gradient');
+            if (meshGradient) {
+                if (isDarkMode) {
+                    meshGradient.style.opacity = '0.3';
+                } else {
+                    meshGradient.style.opacity = '1';
+                }
+            }
+
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        // Event listener for dark mode toggle
+        darkModeToggle.addEventListener('change', (e) => {
+            applyDarkMode(e.target.checked);
+        });
+
+        // Load preference on page load
+        loadDarkModePreference();
     </script>
 </body>
+
 </html>
 
 </body>
+
 </html>
