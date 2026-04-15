@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akanyana Lesly | Personal Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --purple: #9d50bb;
+            --purple-glow: rgba(157, 80, 187, 0.4);
+            --cyan: #00d2ff;
+            --cyan-glow: rgba(0, 210, 255, 0.4);
+            --dark-bg: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f0f0f0;
+            --text-dim: #b0b0b0;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Animated Mesh Background --- */
+        .bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);
+            overflow: hidden;
+        }
+
+        .mesh-gradient {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                radial-gradient(circle at 30% 30%, var(--purple-glow) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, var(--cyan-glow) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, var(--purple-glow) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, var(--cyan-glow) 0%, transparent 40%);
+            filter: blur(80px);
+            animation: moveMesh 20s infinite alternate linear;
+        }
+
+        @keyframes moveMesh {
+            from { transform: translate(0, 0) rotate(0deg); }
+            to { transform: translate(10%, 10%) rotate(5deg); }
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: transform 0.4s ease;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Language Switcher --- */
+        .lang-switcher {
+            position: relative;
+        }
+
+        .lang-select {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lang-select:hover {
+            border-color: var(--cyan);
+        }
+
+        .lang-select option {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            padding: 0 10%;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero .typing-container {
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--text-dim);
+            height: 3rem;
+        }
+
+        #typing-text {
+            color: var(--cyan);
+            font-weight: 600;
+            border-right: 3px solid var(--purple);
+            padding-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .hero-btns {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        .hero-img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInUp 1s ease 0.8s backwards;
+        }
+
+        .hero-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
+            box-shadow: 0 0 25px var(--purple-glow), 0 0 50px var(--cyan-glow);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .hero-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px var(--purple), 0 0 70px var(--cyan);
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--dark-bg);
+        }
+
+        .btn {
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--cyan);
+        }
+
+        /* --- Common Section Styles --- */
+        section {
+            padding: 100px 10%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        section.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple), var(--cyan));
+            border-radius: 2px;
+        }
+
+        /* --- About Section --- */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-img::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 2px solid var(--cyan);
+            border-radius: 20px;
+            z-index: -1;
+            transform: rotate(-10deg);
+        }
+
+        .about-img i {
+            font-size: 8rem;
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--cyan);
+        }
+
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--glass-bg);
+            padding: 2.5rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 210, 255, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .skill-list {
+            list-style: none;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 1200px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* --- Experience Section --- */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--glass-border);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 4rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            border-color: var(--purple);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--purple);
+            border: 4px solid var(--dark-bg);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px var(--purple);
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: scale(1.03);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--purple-glow), var(--cyan-glow));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .project-img i {
+            font-size: 5rem;
+            color: white;
+            opacity: 0.5;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--cyan);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            color: var(--text-dim);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-btn {
+            flex: 1;
+            padding: 0.6rem 0;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-view {
+            background: linear-gradient(45deg, var(--purple), var(--cyan));
+            color: white;
+        }
+
+        .btn-view:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-github {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: white;
+        }
+
+        .btn-github:hover {
+            border-color: var(--cyan);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Contact Section --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--purple);
+        }
+
+        .info-item a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .info-item a:hover {
+            color: var(--cyan);
+        }
+
+        .contact-form {
+            background: var(--glass-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: white;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--cyan);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-icons a {
+            color: var(--text-main);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--cyan);
+            transform: translateY(-5px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 3rem 10%;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column-reverse;
+                height: auto;
+                padding: 120px 10% 60px;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-img {
+                width: 280px;
+                height: 280px;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .about-container, .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .timeline::before { left: 40px; }
+            .timeline-item { justify-content: flex-start; padding-left: 80px; }
+            .timeline-item:nth-child(even) { flex-direction: row; }
+            .timeline-content { width: 100%; }
+            .timeline-dot { left: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero .typing-container { font-size: 1.5rem; }
+            section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-wrapper">
+        <div class="mesh-gradient"></div>
+    </div>
+
+    <nav id="navbar">
+        <div class="logo">AKANYANA.</div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#hero" data-i18n="nav-home">Home</a></li>
+                <li><a href="#about" data-i18n="nav-about">About</a></li>
+                <li><a href="#skills" data-i18n="nav-skills">Skills</a></li>
+                <li><a href="#experience" data-i18n="nav-experience">Experience</a></li>
+                <li><a href="#projects" data-i18n="nav-projects">Projects</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <select class="lang-select" id="lang-select">
+                    <option value="en">EN</option>
+                    <option value="fr">FR</option>
+                    <option value="rw">RW</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero" style="opacity: 1; transform: none;">
+        <div class="hero-content">
+            <h1><span data-i18n="hero-hi">Hi, I'm</span> <span style="color: var(--purple);">Akanyana Lesly</span></h1>
+            <div class="typing-container">
+                <span data-i18n="hero-tagline">I am a</span> <span id="typing-text"></span>
+            </div>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary" data-i18n="hero-btn-work">View My Work</a>
+                <a href="#contact" class="btn btn-secondary" data-i18n="hero-btn-contact">Get In Touch</a>
+            </div>
+        </div>
+        <div class="hero-img-container">
+            <div class="hero-img">
+                <img src="lesly.jpeg" alt="Akanyana Lesly">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title" data-i18n="about-title">About Me</h2>
+        <div class="about-container">
+            <div class="about-img">
+                <img src="lesly.jpeg" alt="Akanyana Lesly" style="width:100%; height:100%; object-fit:cover; border-radius:20px;">
+            </div>
+            <div class="about-text">
+                <h3 data-i18n="about-heading">Designing the Future, One Line at a Time.</h3>
+                <p data-i18n="about-p1">I am a passionate Full-Stack Developer and creative problem solver currently pursuing my studies at <strong>AUCA (Adventist University of Central Africa)</strong>. I have a deep love for building digital experiences that matter, blending aesthetic design with robust functionality.</p>
+                <br>
+                <p data-i18n="about-p2">My approach is simple: understand the problem, architect the solution, and deliver excellence. Whether it's a complex enterprise application or a sleek landing page, I bring the same level of dedication and precision to every project.</p>
+                <div class="hero-btns" style="margin-top: 2rem; justify-content: flex-start;">
+                    <a href="https://drive.google.com/uc?export=download&id=1mJhglJO-fTE8DPwr19qfPoazJZvJroUQ" target="_blank" class="btn btn-primary" data-i18n="about-btn-cv">Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title" data-i18n="skills-title">My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class='bx bxl-html5 skill-icon'></i>
+                <h3 data-i18n="skill-frontend">Frontend</h3>
+                <ul class="skill-list">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <i class='bx bxs-server skill-icon'></i>
+                <h3 data-i18n="skill-backend">Backend</h3>
+                <ul class="skill-list">
+                    <li>PHP</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <i class='bx bxs-data skill-icon'></i>
+                <h3 data-i18n="skill-database">Database</h3>
+                <ul class="skill-list">
+                    <li>MySQL</li>
+                    <li>Database Design</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <i class='bx bx-code-alt skill-icon'></i>
+                <h3 data-i18n="skill-programming">Programming</h3>
+                <ul class="skill-list">
+                    <li>Object-Oriented Programming</li>
+                    <li>Web Development</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title" data-i18n="exp-title">Experience & Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 style="color: var(--cyan);" data-i18n="exp-role1">Software Engineering Student</h3>
+                    <p style="font-size: 0.8rem; color: var(--purple);" data-i18n="exp-place1">AUCA (Adventist University of Central Africa) | 2023 - Present</p>
+                    <p data-i18n="exp-desc1">Focusing on full-stack development, software architecture, and solving complex problems through code. Actively building projects using PHP, MySQL, and modern web technologies.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 style="color: var(--cyan);" data-i18n="exp-role2">A2SV Trainee (Africa to Silicon Valley)</h3>
+                    <p style="font-size: 0.8rem; color: var(--purple);" data-i18n="exp-place2">2025 - Present</p>
+                    <p data-i18n="exp-desc2">Participating in an intensive training program focused on algorithms, data structures, and problem-solving to prepare for top tech company interviews. Building strong foundations in competitive programming and software engineering best practices. Also exploring the integration of Artificial Intelligence tools and technologies to enhance development workflows and build smarter, more efficient solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title" data-i18n="projects-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Medical Appointment System" style="width: 100%; height: 200px; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <h3 data-i18n="proj1-title">Medical Appointment System</h3>
+                    <p data-i18n="proj1-desc">A comprehensive system for scheduling and managing medical appointments efficiently.</p>
+                    <div class="project-tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/medicalappoint/index.html" target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
+                        <a href="https://github.com/Akanyanalesly/medical-appointment-system" target="_blank" class="project-btn btn-github">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=80" alt="Personal Nutrition Management System" style="width: 100%; height: 200px; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <h3 data-i18n="proj2-title">Personal Nutrition Management System</h3>
+                    <p data-i18n="proj2-desc">Track dietary habits and manage personalized nutrition plans for a healthier lifestyle.</p>
+                    <div class="project-tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/Personal%20nutrition%20Management%20System/index.php" target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
+                        <a href="https://github.com/Akanyanalesly/personal-nutrition-management-system" target="_blank" class="project-btn btn-github">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Taxi Management System" style="width: 100%; height: 200px; object-fit: cover;">
+                </div>
+                <div class="project-info">
+                    <h3 data-i18n="proj3-title">Taxi Management System</h3>
+                    <p data-i18n="proj3-desc">Streamlined platform for managing taxi bookings, driver assignments, and fleet operations.</p>
+                    <div class="project-tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">CSS3</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="file:///C:/Users/Lesly/Documents/PORTIFOLIO/projects/taxi_management/index.php" target="_blank" class="project-btn btn-view" data-i18n="projects-btn-view">View Project</a>
+                        <a href="https://github.com/Akanyanalesly/taxi_management" target="_blank" class="project-btn btn-github">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title" data-i18n="contact-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3 data-i18n="contact-heading">Let's Collaborate</h3>
+                <p data-i18n="contact-desc">Have a project in mind or just want to say hi? Feel free to reach out through the form or my social channels.</p>
+                <div class="info-item" style="margin-top: 2rem;">
+                    <i class='bx bx-envelope'></i>
+                    <span><a href="mailto:leslyakanyana38@gmail.com">leslyakanyana38@gmail.com</a></span>
+                </div>
+                <div class="info-item">
+                    <i class='bx bx-phone'></i>
+                    <span><a href="tel:+250786964276">+250 786 964 276</a></span>
+                </div>
+                <div class="info-item">
+                    <i class='bx bx-map'></i>
+                    <span data-i18n="contact-loc">Kigali, Rwanda</span>
+                </div>
+                <div class="social-icons">
+                    <a href="https://github.com/Akanyanalesly" target="_blank"><i class='bx bxl-github'></i></a>
+                    <a href="https://www.linkedin.com/in/akanyana-lesly-3735582a3/" target="_blank"><i class='bx bxl-linkedin-square'></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-twitter'></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram'></i></a>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" data-i18n-placeholder="contact-name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" data-i18n-placeholder="contact-email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="5" data-i18n-placeholder="contact-msg" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;" data-i18n="contact-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Akanyana Lesly. <span data-i18n="footer-copy">All rights reserved. Designed with</span> <span style="color: var(--purple);">&hearts;</span></p>
+    </footer>
+
+    <script>
+        // --- Translations ---
+        const translations = {
+            en: {
+                "nav-home": "Home",
+                "nav-about": "About",
+                "nav-skills": "Skills",
+                "nav-experience": "Experience",
+                "nav-projects": "Projects",
+                "nav-contact": "Contact",
+                "hero-hi": "Hi, I'm",
+                "hero-tagline": "I am a",
+                "hero-phrases": ["Developer", "Problem Solver", "Tech Enthusiast"],
+                "hero-btn-work": "View My Work",
+                "hero-btn-contact": "Get In Touch",
+                "about-title": "About Me",
+                "about-heading": "Designing the Future, One Line at a Time.",
+                "about-p1": "I am a passionate Full-Stack Developer and creative problem solver currently pursuing my studies at <strong>AUCA (Adventist University of Central Africa)</strong>. I have a deep love for building digital experiences that matter, blending aesthetic design with robust functionality.",
+                "about-p2": "My approach is simple: understand the problem, architect the solution, and deliver excellence. Whether it's a complex enterprise application or a sleek landing page, I bring the same level of dedication and precision to every project.",
+                "about-btn-cv": "Download CV",
+                "skills-title": "My Skills",
+                "skill-frontend": "Frontend",
+                "skill-backend": "Backend",
+                "skill-database": "Database",
+                "skill-programming": "Programming",
+                "exp-title": "Experience & Education",
+                "exp-role1": "Software Engineering Student",
+                "exp-place1": "AUCA (Adventist University of Central Africa) | 2023 - Present",
+                "exp-desc1": "Focusing on full-stack development, software architecture, and solving complex problems through code. Actively building projects using PHP, MySQL, and modern web technologies.",
+                "exp-role2": "A2SV Trainee (Africa to Silicon Valley)",
+                "exp-place2": "2025 - Present",
+                "exp-desc2": "Participating in an intensive training program focused on algorithms, data structures, and problem-solving to prepare for top tech company interviews. Building strong foundations in competitive programming and software engineering best practices. Also exploring the integration of Artificial Intelligence tools and technologies to enhance development workflows and build smarter, more efficient solutions.",
+                "projects-title": "Featured Projects",
+                "proj1-title": "Medical Appointment System",
+                "proj1-desc": "A comprehensive system for scheduling and managing medical appointments efficiently.",
+                "proj2-title": "Personal Nutrition Management System",
+                "proj2-desc": "Track dietary habits and manage personalized nutrition plans for a healthier lifestyle.",
+                "proj3-title": "Taxi Management System",
+                "proj3-desc": "Streamlined platform for managing taxi bookings, driver assignments, and fleet operations.",
+                "projects-btn-view": "View Project",
+                "contact-title": "Get In Touch",
+                "contact-heading": "Let's Collaborate",
+                "contact-desc": "Have a project in mind or just want to say hi? Feel free to reach out through the form or my social channels.",
+                "contact-loc": "Kigali, Rwanda",
+                "contact-name": "Your Name",
+                "contact-email": "Your Email",
+                "contact-msg": "Your Message",
+                "contact-btn": "Send Message",
+                "footer-copy": "All rights reserved. Designed with",
+                "sending": "Sending...",
+                "sent": "Message Sent!"
+            },
+            fr: {
+                "nav-home": "Accueil",
+                "nav-about": "À propos",
+                "nav-skills": "Compétences",
+                "nav-experience": "Expérience",
+                "nav-projects": "Projets",
+                "nav-contact": "Contact",
+                "hero-hi": "Salut, je suis",
+                "hero-tagline": "Je suis un",
+                "hero-phrases": ["Développeur", "Résolveur de Problèmes", "Passionné de Tech"],
+                "hero-btn-work": "Voir mon travail",
+                "hero-btn-contact": "Me contacter",
+                "about-title": "À propos de moi",
+                "about-heading": "Concevoir l'avenir, une ligne à la fois.",
+                "about-p1": "Je suis un développeur Full-Stack passionné et un résolveur de problèmes créatif qui poursuit actuellement mes études à l'<strong>AUCA (Université adventiste d'Afrique centrale)</strong>. J'adore créer des expériences numériques qui comptent, alliant design esthétique et fonctionnalités robustes.",
+                "about-p2": "Mon approche est simple : comprendre le problème, concevoir la solution et viser l'excellence. Qu'il s'agisse d'une application d'entreprise complexe ou d'une page de destination élégante, j'apporte le même niveau de dévouement et de précision à chaque projet.",
+                "about-btn-cv": "Télécharger le CV",
+                "skills-title": "Mes compétences",
+                "skill-frontend": "Développement Frontend",
+                "skill-backend": "Architecture Backend",
+                "skill-uiux": "Design UI/UX",
+                "skill-devops": "DevOps & Cloud",
+                "exp-title": "Expérience & Éducation",
+                "exp-role1": "Étudiant en génie logiciel",
+                "exp-place1": "AUCA (Université adventiste d'Afrique centrale) | 2023 - Présent",
+                "exp-desc1": "Concentration sur le développement full-stack, l'architecture logicielle et la résolution de problèmes complexes par le code. Construction active de projets utilisant PHP, MySQL et les technologies web modernes.",
+                "exp-role2": "Stagiaire A2SV (Africa to Silicon Valley)",
+                "exp-place2": "2025 - Présent",
+                "exp-desc2": "Participation à un programme de formation intensif axé sur les algorithmes, les structures de données et la résolution de problèmes pour se préparer aux entretiens des grandes entreprises technologiques. Construction de bases solides en programmation compétitive et en meilleures pratiques de génie logiciel. Exploration également de l'intégration des outils et technologies d'Intelligence Artificielle pour améliorer les flux de travail de développement et construire des solutions plus intelligentes et efficaces.",
+                "projects-title": "Projets vedettes",
+                "proj1-title": "Système de rendez-vous médicaux",
+                "proj1-desc": "Un système complet pour planifier et gérer efficacement les rendez-vous médicaux.",
+                "proj2-title": "Système de gestion de la nutrition personnelle",
+                "proj2-desc": "Suivez vos habitudes alimentaires et gérez des plans de nutrition personnalisés pour un mode de vie plus sain.",
+                "proj3-title": "Système de gestion de taxi",
+                "proj3-desc": "Plateforme simplifiée pour la gestion des réservations de taxis, l'affectation des chauffeurs et les opérations de la flotte.",
+                "projects-btn-view": "Voir le projet",
+                "contact-title": "Contactez-moi",
+                "contact-heading": "Collaborons ensemble",
+                "contact-desc": "Vous avez un projet en tête ou vous voulez simplement dire bonjour ? N'hésitez pas à me contacter via le formulaire ou mes réseaux sociaux.",
+                "contact-loc": "Kigali, Rwanda",
+                "contact-name": "Votre Nom",
+                "contact-email": "Votre Email",
+                "contact-msg": "Votre Message",
+                "contact-btn": "Envoyer le message",
+                "footer-copy": "Tous droits réservés. Conçu avec",
+                "sending": "Envoi...",
+                "sent": "Message envoyé !"
+            },
+            rw: {
+                "nav-home": "Ahabanza",
+                "nav-about": "Ibyerekeye",
+                "nav-skills": "Ubumenyi",
+                "nav-experience": "Inararibonye",
+                "nav-projects": "Imishinga",
+                "nav-contact": "Twandikire",
+                "hero-hi": "Muraho, nitwa",
+                "hero-tagline": "Ndi",
+                "hero-phrases": ["Umuprogrami", "Umushobozi", "Inzobere mu Ikoranabuhanga"],
+                "hero-btn-work": "Reba ibyo nakoze",
+                "hero-btn-contact": "Twandikire",
+                "about-title": "Ibyerekeye",
+                "about-heading": "Guhanga ejo hazaza, umurongo ku wundi.",
+                "about-p1": "Ndi umuprogrami ukora imishinga yose (Full-Stack) n'umukemuzi w'ibibazo udasanzwe ubu niga muri <strong>AUCA (Adventist University of Central Africa)</strong>. Nkunda cyane guhanga uburyo bw'ikoranabuhanga bufite akamaro, ngeranya igishushanyo cyiza n'imikorere ikomeye.",
+                "about-p2": "Uburyo nkora burasobanutse: kumva ikibazo, gutegura igisubizo, no gutanga ibyiza cyane. Hvaba ari porogaramu nini y'ikigo cyangwa urupapuro rwiza rwamamaza, nshyira imbaraga n'ubwitonzi bungana kuri buri mushinga.",
+                "about-btn-cv": "Kurura CV",
+                "skills-title": "Ubumenyi bwanjye",
+                "skill-frontend": "Gukora imbere ha porogaramu",
+                "skill-backend": "Gukora inyuma ha porogaramu",
+                "skill-uiux": "Imiterere n'imikoreshereze",
+                "skill-devops": "DevOps & Cloud",
+                "exp-title": "Inararibonye & Amashuri",
+                "exp-role1": "Umunyeshuri wa Software Engineering",
+                "exp-place1": "AUCA (Adventist University of Central Africa) | 2023 - Kugeza ubu",
+                "exp-desc1": "Nibanze ku gukora porogaramu zose, imiterere ya porogaramu, no gukemura ibibazo bikomeye binyuze muri kode. Ndacyakora imishinga ikoresha PHP, MySQL, n'ubundi buryo bugezweho bwa web.",
+                "exp-role2": "A2SV Trainee (Africa to Silicon Valley)",
+                "exp-place2": "2025 - Kugeza ubu",
+                "exp-desc2": "Bitabira gahunda y'imyitozo ikomeye yibanda kuri algorithms, imiterere y'amakuru (data structures), n'uburyo bwo gukemura ibibazo hategurwa ibizamini by'ibigo bikomeye by'ikoranabuhanga. Guhanga imisingi ikomeye muri porogaramu z'amarushanwa n'imikorere myiza y'ubwubatsi bwa software. Nanone nshakashaka uko nakoresha ibikoresho by'ubwenge bw'ubukorano (AI) mu kunoza akazi no gukora porogaramu zifite ubwenge n'ubushobozi buhanitse.",
+                "projects-title": "Imishinga nakoze",
+                "proj1-title": "Uburyo bwo gufata gahunda kwa muganga",
+                "proj1-desc": "Uburyo bwuzuye bwo guteganya no gucunga gahunda zo kwa muganga neza.",
+                "proj2-title": "Uburyo bwo gucunga imirire yawe",
+                "proj2-desc": "Kurikirana imirire yawe kandi ucunge gahunda z'imirire zihariye ku mibereho myiza.",
+                "proj3-title": "Uburyo bwo gucunga amatekisi",
+                "proj3-desc": "Uburyo bworoshye bwo gucunga imenyekanisha ry'amatekisi, guha akazi abashoferi, n'imikorere y'ibinyabiziga.",
+                "projects-btn-view": "Reba umushinga",
+                "contact-title": "Twandikire",
+                "contact-heading": "Twafatanya mu kazi",
+                "contact-desc": "Ufite umushinga utekereza cyangwa ushaka kunsuhuza gusa? Ntukidandure kunyandikira binyuze ku rupapuro rwo kwandika cyangwa ku mbuga nkoranyambaga zanjye.",
+                "contact-loc": "Kigali, u Rwanda",
+                "contact-name": "Amazina yawe",
+                "contact-email": "Imeli yawe",
+                "contact-msg": "Ubutumwa bwawe",
+                "contact-btn": "Ohereza ubutumwa",
+                "footer-copy": "Uburenganzira bwose ni ubwacu. Byahanzwe na",
+                "sending": "Biracyoherezwa...",
+                "sent": "Ubutumwa bwoherejwe!"
+            }
+        };
+
+        let currentLang = 'en';
+
+        // --- Language Switching Logic ---
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+
+            // Update typing phrases
+            phrases = translations[lang]["hero-phrases"];
+            i = 0;
+            j = 0;
+            currentPhrase = [];
+            isDeleting = false;
+        }
+
+        document.getElementById('lang-select').addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+
+        // --- Typing Animation ---
+        const typingText = document.getElementById('typing-text');
+        let phrases = translations['en']["hero-phrases"];
+        let i = 0;
+        let j = 0;
+        let currentPhrase = [];
+        let isDeleting = false;
+        let isEnd = false;
+
+        function loop() {
+            isEnd = false;
+            typingText.innerHTML = currentPhrase.join('');
+
+            if (i < phrases.length) {
+                if (!isDeleting && j <= phrases[i].length) {
+                    currentPhrase.push(phrases[i][j]);
+                    j++;
+                }
+
+                if (isDeleting && j <= phrases[i].length) {
+                    currentPhrase.pop(phrases[i][j]);
+                    j--;
+                }
+
+                if (j == phrases[i].length) {
+                    isEnd = true;
+                    isDeleting = true;
+                }
+
+                if (isDeleting && j === 0) {
+                    currentPhrase = [];
+                    isDeleting = false;
+                    i++;
+                    if (i === phrases.length) {
+                        i = 0;
+                    }
+                }
+            }
+            const spedUp = Math.random() * (80 - 50) + 50;
+            const normalSpeed = Math.random() * (150 - 100) + 100;
+            const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed;
+            setTimeout(loop, time);
+        }
+        loop();
+
+        // --- Smart Navbar ---
+        let lastScrollY = window.scrollY;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY) {
+                navbar.classList.add('nav-hidden');
+            } else {
+                navbar.classList.remove('nav-hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // --- Scroll Reveal ---
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    
+                    if (entry.target.id === 'skills') {
+                        const progressBars = entry.target.querySelectorAll('.progress');
+                        progressBars.forEach(bar => {
+                            bar.style.width = bar.getAttribute('data-width');
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Form Submission (Visual Only) ---
+        const form = document.querySelector('.contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = translations[currentLang]["sending"];
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = translations[currentLang]["sent"];
+                btn.style.background = 'linear-gradient(45deg, #00b09b, #96c93d)';
+                form.reset();
+                setTimeout(() => {
+                    btn.innerHTML = translations[currentLang]["contact-btn"];
+                    btn.style.background = 'linear-gradient(45deg, var(--purple), var(--cyan))';
+                    btn.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
+
+</body>
+</html>
