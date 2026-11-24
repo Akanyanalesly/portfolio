@@ -355,8 +355,8 @@ document.querySelectorAll('section').forEach(s=>observer.observe(s));
 
 // Professional dark and light themes
 const toggle=document.getElementById('dark-mode-checkbox'),root=document.documentElement;
-function applyTheme(light){root.dataset.theme=light?'light':'dark';try{localStorage.setItem('portfolioThemeV2',light?'light':'dark')}catch(e){}}
-try{toggle.checked=localStorage.getItem('portfolioThemeV2')!=='dark'}catch(e){toggle.checked=true}
+function applyTheme(light){root.dataset.theme=light?'light':'dark';try{localStorage.setItem('portfolioThemeV3',light?'light':'dark')}catch(e){}}
+try{toggle.checked=localStorage.getItem('portfolioThemeV3')==='light'}catch(e){toggle.checked=false}
 applyTheme(toggle.checked);
 toggle.addEventListener('change',e=>applyTheme(e.target.checked));
 </script>
